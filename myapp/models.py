@@ -4,6 +4,13 @@ from django.utils.text import slugify
 import random
 import string
 
+def document_upload_path(instance, filename):
+    """
+    Custom upload path for documents based on session slug.
+    This ensures files are stored in session-based directories.
+    """
+    return f'documents/{instance.session.slug}/{filename}'
+
 # Chat Session Model
 class ChatSession(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -49,12 +56,17 @@ class Chat(models.Model):
 class Document(models.Model):
     session = models.ForeignKey(ChatSession, on_delete=models.CASCADE, related_name='documents')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    file = models.FileField(upload_to='documents/%Y/%m/%d/')
+    file = models.FileField(upload_to=document_upload_path)
     filename = models.CharField(max_length=255)
     file_type = models.CharField(max_length=10)
     uploaded_at = models.DateTimeField(auto_now_add=True)
     chunk_count = models.IntegerField(default=0)
     processed = models.BooleanField(default=False)
+    # Store file content in database
+    file_content = models.TextField(blank=True, null=True)
+    # Store FAISS index data in database
+    faiss_index_data = models.BinaryField(blank=True, null=True)
+    faiss_index_pickle = models.BinaryField(blank=True, null=True)
 
     class Meta:
         ordering = ['-uploaded_at']

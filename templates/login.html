@@ -5,8 +5,9 @@
 {% block styles %}
 <style>
   body {
-    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: #343541;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #ffffff;
   }
 
   .login-container {
@@ -20,98 +21,116 @@
   .card {
     width: 100%;
     max-width: 400px;
-    background: #fff;
+    background: #202123;
     border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     overflow: hidden;
     animation: fadeIn 0.8s ease-in-out;
+    border: 1px solid #4d4d4f;
   }
 
   .card-header {
-    background: linear-gradient(90deg, #007bff, #0056d2);
-    color: #fff;
+    background: #202123;
+    color: #ffffff;
     font-size: 22px;
-    font-weight: bold;
+    font-weight: 600;
     text-align: center;
-    padding: 18px;
+    padding: 24px;
     letter-spacing: 0.5px;
+    border-bottom: 1px solid #4d4d4f;
   }
 
   .card-body {
-    padding: 30px;
+    padding: 32px;
+    background: #202123;
   }
 
   .form-group {
-    margin-bottom: 18px;
+    margin-bottom: 20px;
   }
 
   label {
     font-weight: 600;
     font-size: 14px;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
     display: block;
-    color: #333;
+    color: #ffffff;
   }
 
   input[type=text], input[type=password] {
     border-radius: 8px;
-    border: 1px solid #dcdcdc;
-    padding: 12px 14px;
-    font-size: 15px;
+    border: 1px solid #565869;
+    padding: 12px 16px;
+    font-size: 16px;
     width: 100%;
     box-sizing: border-box;
-    transition: all 0.3s ease;
-  }
-
-  input[type=text]:focus, input[type=password]:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 6px rgba(0, 123, 255, 0.3);
+    transition: all 0.2s ease;
+    background: #40414f;
+    color: #ffffff;
     outline: none;
   }
 
+  input[type=text]:focus, input[type=password]:focus {
+    border-color: #10a37f;
+    box-shadow: 0 0 0 2px rgba(16, 163, 127, 0.2);
+  }
+
+  input[type=text]::placeholder, input[type=password]::placeholder {
+    color: #8e8ea0;
+  }
+
   button[type=submit] {
-    background: linear-gradient(90deg, #007bff, #0056d2);
-    color: #fff;
+    background: #10a37f;
+    color: #ffffff;
     font-size: 16px;
-    font-weight: bold;
-    padding: 12px;
+    font-weight: 600;
+    padding: 12px 24px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     width: 100%;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
+    height: 48px;
   }
 
   .register-prompt {
     text-align: center;
-    margin-top: 15px;
+    margin-top: 20px;
     font-size: 14px;
-    color: #666;
+    color: #8e8ea0;
   }
   
   .register-prompt a {
-    color: #007bff;
+    color: #10a37f;
     text-decoration: none;
+    font-weight: 500;
   }
   
   .register-prompt a:hover {
+    color: #0d8a6b;
     text-decoration: underline;
   }
 
   button[type=submit]:hover {
-    background: linear-gradient(90deg, #0056d2, #0041a8);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 12px rgba(0, 91, 187, 0.3);
+    background: #0d8a6b;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(16, 163, 127, 0.3);
+  }
+
+  button[type=submit]:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(16, 163, 127, 0.3);
   }
 
   .alert-danger {
-    background-color: #fdecea;
-    color: #d93025;
-    padding: 12px;
-    margin-bottom: 18px;
-    border: 1px solid #f5c6cb;
+    background-color: #2d1b1b;
+    color: #ff6b6b;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    border: 1px solid #4a2c2c;
     border-radius: 8px;
     font-size: 14px;
+    font-weight: 500;
   }
 
   @keyframes fadeIn {

@@ -5,64 +5,92 @@
   body, html {
     height: 100%;
     margin: 0;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background: #f7f7f8;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: #343541;
+    color: #ffffff;
   }
 
   /* Sidebar */
   .sidebar {
     width: 260px;
     background: #202123;
-    color: white;
+    color: #ffffff;
     display: flex;
     flex-direction: column;
     height: 100vh;
     position: fixed;
     left: 0;
     top: 0;
-    padding: 10px;
+    padding: 0;
+    border-right: 1px solid #4d4d4f;
   }
 
   .sidebar-header {
-    padding: 12px;
+    padding: 20px 16px;
+    font-size: 16px;
+    font-weight: 600;
+    border-bottom: 1px solid #4d4d4f;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .sidebar-header::before {
+    content: "🤖";
     font-size: 18px;
-    font-weight: bold;
-    border-bottom: 1px solid #444;
-    margin-bottom: 10px;
   }
 
   .new-chat-btn {
-    background: #343541;
-    border: none;
-    padding: 12px;
-    color: white;
+    background: transparent;
+    border: 1px solid #4d4d4f;
+    padding: 12px 16px;
+    color: #ffffff;
     text-align: left;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
-    margin-bottom: 15px;
-    transition: background 0.2s ease;
+    margin: 16px;
+    transition: all 0.2s ease;
     text-decoration: none;
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .new-chat-btn::before {
+    content: "+";
+    font-size: 16px;
+    font-weight: bold;
   }
 
   .new-chat-btn:hover {
-    background: #40414f;
+    background: #2a2b32;
+    border-color: #565869;
   }
 
   .chat-history {
     flex: 1;
     overflow-y: auto;
+    padding: 8px;
   }
 
   .chat-item {
-    padding: 10px;
+    padding: 12px 16px;
     cursor: pointer;
-    border-radius: 6px;
-    margin-bottom: 5px;
-    transition: background 0.2s ease;
+    border-radius: 8px;
+    margin-bottom: 4px;
+    transition: all 0.2s ease;
     text-decoration: none;
-    color: white;
+    color: #ffffff;
     display: block;
+    font-size: 14px;
+    line-height: 1.4;
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .chat-item:hover {
@@ -70,13 +98,14 @@
   }
 
   .chat-item.active {
-    background: #2a2b32;
+    background: #343541;
   }
 
   /* Document indicator in sidebar */
   .chat-item.has-doc::before {
-    content: "📄 ";
-    margin-right: 5px;
+    content: "📄";
+    margin-right: 8px;
+    font-size: 12px;
   }
 
   /* Main Chat Area */
@@ -88,6 +117,7 @@
     width: auto;
     padding: 0;
     box-sizing: border-box;
+    background: #343541;
   }
 
   .card {
@@ -95,80 +125,147 @@
     display: flex;
     flex-direction: column;
     border-radius: 0;
-    background: #fff;
+    background: #343541;
     box-shadow: none;
   }
 
   .card-header {
-    background: linear-gradient(90deg, #007bff, #0056d2);
-    color: #fff;
-    font-size: 18px;
+    background: #343541;
+    color: #ffffff;
+    font-size: 16px;
     font-weight: 600;
-    padding: 15px;
+    padding: 20px 24px;
+    border-bottom: 1px solid #4d4d4f;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .user-info .username {
+    font-weight: 500;
+    color: #ffffff;
+  }
+
+  .user-info .logout {
+    color: #8e8ea0;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+  }
+
+  .user-info .logout:hover {
+    background: #2a2b32;
+    color: #ffffff;
   }
 
   /* Document status badge */
   .doc-status {
-    display: inline-block;
-    background: rgba(255, 255, 255, 0.2);
-    padding: 4px 10px;
-    border-radius: 12px;
-    font-size: 13px;
-    margin-left: 10px;
+    display: inline-flex;
+    align-items: center;
+    background: #10a37f;
+    color: #ffffff;
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 500;
+    gap: 4px;
   }
 
   .messages-box {
     flex: 1;
     overflow-y: auto;
-    padding: 20px 20px 120px 20px; /* Increased bottom padding to prevent overlap */
-    background: #f7faff;
+    padding: 0;
+    background: #343541;
     margin-bottom: 0;
+    height: calc(100vh - 300px); /* Account for header and input area */
+    max-height: calc(100vh - 300px);
+    padding-bottom: 20px; /* Space for input area */
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile */
   }
 
   .messages-list {
-    padding-left: 0;
-    margin-bottom: 0;
+    padding: 0;
+    margin: 0;
+    max-width: 768px;
+    margin: 0 auto;
+    min-height: 100%;
+    padding-bottom: 20px; /* Extra space at bottom */
   }
 
   .message {
-    margin-bottom: 15px;
+    margin-bottom: 0;
     list-style: none;
     display: flex;
+    padding: 24px 0;
+    border-bottom: 1px solid #4d4d4f;
   }
 
   .message:last-child {
-    margin-bottom: 30px; /* Extra spacing for last message */
-  }
-
-  /* Ensure proper spacing for the messages list */
-  .messages-list {
-    padding-bottom: 20px;
+    border-bottom: none;
   }
 
   .message-text {
-    padding: 12px 16px;
-    border-radius: 12px;
-    max-width: 70%;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    padding: 0;
+    border-radius: 0;
+    max-width: 100%;
+    box-shadow: none;
     animation: slideUp 0.3s ease;
+    background: transparent;
+    color: #ffffff;
+    line-height: 1.6;
   }
 
   .sent {
-    background: #b3e6cc;
+    background: #343541;
     align-self: flex-end;
     margin-left: auto;
+    flex-direction: row-reverse;
   }
 
   .received {
-    background: #ffffff;
+    background: #343541;
     align-self: flex-start;
     margin-right: auto;
   }
 
   .system-message {
-    background: #fff3cd;
+    background: #343541;
     align-self: center;
     text-align: center;
+    color: #8e8ea0;
+  }
+
+  .message-sender {
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+
+  .sent .message-sender {
+    color: #ffffff;
+  }
+
+  .received .message-sender {
+    color: #10a37f;
+  }
+
+  .system-message .message-sender {
+    color: #8e8ea0;
+  }
+
+  .message-content {
+    font-size: 16px;
+    line-height: 1.6;
+    word-wrap: break-word;
   }
 
   .message-form {
@@ -177,29 +274,45 @@
     bottom: 0;
     left: 260px;
     right: 0;
-    padding: 15px 15px 20px 15px; /* Added bottom padding to prevent button cutoff */
-    background: #ffffff;
-    border-top: 1px solid #ddd;
-    box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
-    z-index: 1000; /* Ensure it stays on top */
-    min-height: 60px; /* Ensure minimum height for the form */
+    padding: 24px;
+    background: #343541;
+    border-top: 1px solid #4d4d4f;
+    z-index: 1000;
     box-sizing: border-box;
+    max-width: 768px;
+    margin: 0 auto;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-left: 130px; /* Half of sidebar width */
+    height: 100px; /* Fixed height for input area */
   }
 
   .message-input {
     flex: 1;
-    border-radius: 8px 0 0 8px;
-    border: 1px solid #ccc;
-    padding: 12px 15px;
-    font-size: 15px;
-    transition: all 0.3s ease;
-    height: 48px; /* Fixed height to match button */
+    border-radius: 12px;
+    border: 1px solid #565869;
+    padding: 12px 16px;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    height: 48px;
     box-sizing: border-box;
+    background: #40414f;
+    color: #ffffff;
+    outline: none;
+  }
+
+  .message-input:focus {
+    border-color: #10a37f;
+    box-shadow: 0 0 0 2px rgba(16, 163, 127, 0.2);
+  }
+
+  .message-input::placeholder {
+    color: #8e8ea0;
   }
 
   .file-upload-btn {
-    background: #f1f1f1;
-    border: 1px solid #ccc;
+    background: #40414f;
+    border: 1px solid #565869;
     border-left: none;
     padding: 0 12px;
     font-size: 18px;
@@ -208,59 +321,104 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    height: 48px; /* Match input and button height */
-    width: 48px; /* Fixed width for consistent appearance */
+    height: 48px;
+    width: 48px;
     box-sizing: border-box;
+    transition: all 0.2s ease;
+    color: #8e8ea0;
+    border-radius: 0 12px 12px 0;
   }
 
   .file-upload-btn:hover {
-    background: #e1e1e1;
+    background: #565869;
+    color: #10a37f;
+    border-color: #10a37f;
+  }
+
+  .file-upload-btn:active {
+    background: #4d4d4f;
+    transform: scale(0.98);
   }
 
   .file-name-display {
     position: absolute;
     bottom: 100%;
     right: 0;
-    background: #007bff;
+    background: #10a37f;
     color: white;
-    padding: 5px 10px;
-    border-radius: 4px;
+    padding: 8px 12px;
+    border-radius: 8px;
     font-size: 12px;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     white-space: nowrap;
     display: none;
+    box-shadow: 0 4px 12px rgba(16, 163, 127, 0.3);
+    border: 1px solid #0d8a6b;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 500;
   }
 
   .file-name-display.show {
     display: block;
+    animation: slideDown 0.3s ease;
+  }
+
+  .file-name-display::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    right: 20px;
+    border: 5px solid transparent;
+    border-top-color: #10a37f;
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .btn-send {
-    border-radius: 0 8px 8px 0;
-    background: linear-gradient(90deg, #007bff, #0056d2);
+    border-radius: 12px;
+    background: #10a37f;
     border: none;
-    color: #fff;
-    font-weight: bold;
+    color: #ffffff;
+    font-weight: 600;
     padding: 12px 20px;
-    min-width: 80px; /* Ensure button has minimum width */
-    height: 48px; /* Fixed height to match input field */
-    transition: all 0.3s ease;
-    white-space: nowrap; /* Prevent text wrapping */
+    min-width: 80px;
+    height: 48px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
     display: flex;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
+    margin-left: 8px;
+    font-size: 14px;
   }
 
   .btn-send:hover {
-    background: linear-gradient(90deg, #0056d2, #0041a8);
+    background: #0d8a6b;
     transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0,91,187,0.25);
+    box-shadow: 0 4px 12px rgba(16, 163, 127, 0.3);
+  }
+
+  .btn-send:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(16, 163, 127, 0.3);
   }
 
   .btn-send:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+    background: #565869;
   }
 
   @keyframes slideUp {
@@ -278,8 +436,8 @@
 
 {% block content %}
 <div class="sidebar">
-  <div class="sidebar-header">My Chats</div>
-  <a href="{% url 'new_chat' %}" class="new-chat-btn">+ New Chat</a>
+  <div class="sidebar-header">AI Chatbot</div>
+  <a href="{% url 'new_chat' %}" class="new-chat-btn">New Chat</a>
   <div class="chat-history">
     {% for session in user_sessions %}
       <a href="{% url 'chat_session' session.slug %}" 
@@ -295,30 +453,24 @@
 <div class="chat-container">
   <div class="card flex-grow-1">
     <div class="card-header">
-      Chat
-      {% if current_session.has_document %}
-        <span class="doc-status">📄 Document Loaded</span>
-      {% endif %}
+      <div class="user-info">
+        <span class="username">Welcome, {{user.username}}</span>
+        {% if current_session.has_document %}
+          <span class="doc-status">📄 Document Loaded</span>
+        {% endif %}
+      </div>
+      <div class="user-info">
+        <a class="logout" href="{% url 'logout' %}">Logout</a>
+      </div>
     </div>
-    {% if user.is_authenticated %}
-    <div class="card-header">
-      <b>Welcome {{user.username}}</b> 
-      <a style="color:white; float:right;" href="{% url 'logout' %}">Logout</a>
-    </div>
-    {% else %}
-    <div class="card-header">
-      <a style="color:white" href="{% url 'login' %}">Login</a> | 
-      <a style="color:white" href="{% url 'register' %}">Register</a>
-    </div>
-    {% endif %}
 
     <div class="card-body messages-box">
       <ul class="list-unstyled messages-list">
         <li class="message received">
           <div class="message-text">
-            <div class="message-sender"><b>AI Chatbot</b></div>
+            <div class="message-sender">AI Chatbot</div>
             <div class="message-content">
-              Hi {{user.username}}, I am your AI Chatbot, you can ask me anything.
+              Hello! I'm your AI assistant. How can I help you today?
               {% if current_session.has_document %}
               <br><br>📄 I have access to your uploaded document and can answer questions about it.
               {% endif %}
@@ -330,7 +482,7 @@
         {% if chat.user == request.user %}
         <li class="message sent">
           <div class="message-text">
-            <div class="message-sender"><b>You</b></div>
+            <div class="message-sender">You</div>
             <div class="message-content">{{chat.message}}</div>
           </div>
         </li>
@@ -338,9 +490,9 @@
         <li class="message received">
           <div class="message-text">
             <div class="message-sender">
-              <b>AI Chatbot</b>
+              AI Chatbot
               {% if chat.is_rag_response %}
-                <span style="font-size: 11px; color: #666;">📄 (from document)</span>
+                <span style="font-size: 12px; color: #8e8ea0; margin-left: 8px;">📄 from document</span>
               {% endif %}
             </div>
             <div class="message-content">{{chat.response}}</div>
@@ -365,6 +517,7 @@
 </form>
 
 <script>
+  // Get all the elements we need
   const messagesList = document.querySelector('.messages-list');
   const messageForm = document.querySelector('.message-form');
   const messageInput = document.querySelector('.message-input');
@@ -372,56 +525,52 @@
   const fileNameDisplay = document.getElementById('fileNameDisplay');
   const sendBtn = document.getElementById('sendBtn');
 
-  // Show selected file name
-  fileInput.addEventListener('change', (e) => {
-    if (e.target.files.length > 0) {
-      const fileName = e.target.files[0].name;
-      fileNameDisplay.textContent = fileName;
+  // Show file name when user selects a file
+  fileInput.addEventListener('change', function() {
+    if (this.files.length > 0) {
+      const fileName = this.files[0].name;
+      fileNameDisplay.textContent = `📎 ${fileName}`;
       fileNameDisplay.classList.add('show');
+      
+      // Add visual feedback to upload button
+      fileInput.parentElement.style.background = '#565869';
+      fileInput.parentElement.style.borderColor = '#10a37f';
     } else {
       fileNameDisplay.classList.remove('show');
+      
+      // Reset upload button style
+      fileInput.parentElement.style.background = '#40414f';
+      fileInput.parentElement.style.borderColor = '#565869';
     }
   });
 
-  messageForm.addEventListener('submit', async (event) => {
-    event.preventDefault();
-
+  // Handle form submission
+  messageForm.addEventListener('submit', async function(event) {
+    event.preventDefault(); // Don't reload the page
+    
+    // Get form data
     const formData = new FormData(messageForm);
     const userMessage = messageInput.value.trim();
     const hasFile = fileInput.files.length > 0;
 
-    // Disable button during processing
+    // Show loading state
     sendBtn.disabled = true;
     sendBtn.textContent = 'Sending...';
 
-    // Show user message immediately if exists
+    // Show user's message immediately
     if (userMessage.length > 0) {
-      const messageItem = document.createElement('li');
-      messageItem.classList.add('message', 'sent');
-      messageItem.innerHTML = `
-        <div class="message-text">
-          <div class="message-sender"><b>You</b></div>
-          <div class="message-content">${escapeHtml(userMessage)}</div>
-        </div>`;
-      messagesList.appendChild(messageItem);
-      messageInput.value = '';
+      addMessage('You', userMessage, 'sent');
+      messageInput.value = ''; // Clear input
     }
 
-    // Show file upload indicator if file selected
+    // Show file upload message
     if (hasFile) {
       const fileName = fileInput.files[0].name;
-      const fileMessage = document.createElement('li');
-      fileMessage.classList.add('message', 'system-message');
-      fileMessage.innerHTML = `
-        <div class="message-text">
-          <div class="message-content">📤 Uploading ${escapeHtml(fileName)}...</div>
-        </div>`;
-      messagesList.appendChild(fileMessage);
-      messagesList.scrollTop = messagesList.scrollHeight;
+      addMessage('System', `📤 Uploading ${fileName}...`, 'system-message');
     }
 
     try {
-      // Send to backend
+      // Send request to server
       const response = await fetch("", {
         method: "POST",
         body: formData
@@ -429,85 +578,79 @@
 
       const data = await response.json();
 
-      // Handle error
+      // Handle errors
       if (data.error) {
-        const errorItem = document.createElement('li');
-        errorItem.classList.add('message', 'system-message');
-        errorItem.innerHTML = `
-          <div class="message-text">
-            <div class="message-content">❌ Error: ${escapeHtml(data.error)}</div>
-          </div>`;
-        messagesList.appendChild(errorItem);
+        addMessage('System', `❌ Error: ${data.error}`, 'system-message');
         return;
       }
 
-      // Render AI/system response
-      const aiItem = document.createElement('li');
-      aiItem.classList.add('message', 'received');
-
+      // Show response
       if (data.message === "File uploaded") {
-        // System message for file upload
-        aiItem.innerHTML = `
-          <div class="message-text">
-            <div class="message-sender"><b>System</b></div>
-            <div class="message-content">${escapeHtml(data.response)}</div>
-          </div>`;
+        addMessage('System', data.response, 'system-message');
         
-        // Redirect to the new session if slug is provided
+        // Redirect to new session or reload page
         if (data.session_slug && !window.location.pathname.includes(data.session_slug)) {
           setTimeout(() => {
             window.location.href = `/${data.session_slug}/`;
           }, 1500);
         } else {
-          // Reload to show document indicator
           setTimeout(() => {
             window.location.reload();
           }, 1500);
         }
       } else {
-        // Regular AI response
-        aiItem.innerHTML = `
-          <div class="message-text">
-            <div class="message-sender"><b>AI Chatbot</b></div>
-            <div class="message-content">${escapeHtml(data.response)}</div>
-          </div>`;
+        addMessage('AI Chatbot', data.response, 'received');
         
-        // Redirect if new session was created
+        // Update URL if new session created
         if (data.session_slug && !window.location.pathname.includes(data.session_slug)) {
           window.history.pushState({}, '', `/${data.session_slug}/`);
         }
       }
 
-      messagesList.appendChild(aiItem);
-      messagesList.scrollTop = messagesList.scrollHeight;
-
     } catch (error) {
-      const errorItem = document.createElement('li');
-      errorItem.classList.add('message', 'system-message');
-      errorItem.innerHTML = `
-        <div class="message-text">
-          <div class="message-content">❌ Connection error. Please try again.</div>
-        </div>`;
-      messagesList.appendChild(errorItem);
+      addMessage('System', '❌ Connection error. Please try again.', 'system-message');
     } finally {
-      // Re-enable button
+      // Reset button and file input
       sendBtn.disabled = false;
       sendBtn.textContent = 'Send';
-      
-      // Reset file input
       fileInput.value = "";
       fileNameDisplay.classList.remove('show');
+      
+      // Reset upload button visual state
+      fileInput.parentElement.style.background = '#40414f';
+      fileInput.parentElement.style.borderColor = '#565869';
     }
   });
 
-  // Auto-scroll to bottom on page load
-  messagesList.scrollTop = messagesList.scrollHeight;
+  // Helper function to add messages to chat
+  function addMessage(sender, content, messageType) {
+    const messageItem = document.createElement('li');
+    messageItem.classList.add('message', messageType);
+    
+    messageItem.innerHTML = `
+      <div class="message-text">
+        <div class="message-sender"><b>${sender}</b></div>
+        <div class="message-content">${escapeHtml(content)}</div>
+      </div>`;
+    
+    messagesList.appendChild(messageItem);
+    scrollToBottom();
+  }
 
-  // Helper function to escape HTML
+  // Helper function to make text safe for HTML
   function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
   }
+
+  // Scroll to bottom when page loads
+  function scrollToBottom() {
+    const messagesBox = document.querySelector('.messages-box');
+    messagesBox.scrollTop = messagesBox.scrollHeight;
+  }
+  
+  // Scroll to bottom on page load
+  scrollToBottom();
 </script>
 {% endblock %}
