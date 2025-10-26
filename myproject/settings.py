@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-u%pv)&%6=)kye*agobw(yuy#gs9s59c!qibkou6@^fse!$fqs*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['balajis-aichatbot.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['balajis-aichatbot.onrender.com', 'localhost', '127.0.0.1', 'brocoder.in']
 
 # Application definition
 
@@ -134,4 +134,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CSRF_TRUSTED_ORIGINS = [
     'https://balajis-aichatbot.onrender.com',
     'http://localhost:8000',
+    'https://brocoder.in',
+
 ]
